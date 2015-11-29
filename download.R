@@ -2,8 +2,8 @@
 rm(list=ls())
 #library("RCurl")
 #cat(file = "gapminder.tsv",RCurl::getURL("https://raw.githubusercontent.com/jennybc/gapminder/master/inst/gapminder.tsv"))
-#library(downloader)
-#download(url = "https://raw.githubusercontent.com/jennybc/gapminder/master/inst/gapminder.tsv", destfile = "gapminder.tsv")
+library(downloader)
+download(url = "https://raw.githubusercontent.com/jennybc/gapminder/master/inst/gapminder.tsv", destfile = "gapminder.tsv")
 
 #Bring in the data as data frame
 library(readr)
@@ -14,11 +14,6 @@ str(gapminder)
 #remove the oc
 library(ggplot2)
 library(dplyr)
-
-
-freq <- as.data.frame(table(gapminder$continent))
-names(freq) <- c("continent","obs")
-kable(freq,format = "markdown")
 
 barplot(table(gapminder$continent))
 
@@ -36,9 +31,6 @@ ggsave(file="lifeExp_dist.png",plot=p1)
 ggsave(file="gdpPercap_dist.png",plot=p2)
 ggsave(file="gdpPercap_dist_continent.png",plot=p3)
 ggsave(file="gdpPercap_growth_continent.png",plot=p4)
-multi_g <- plot_grid(p1,p2,p3,p4)
-ggsave("descriptive.png",plot=multi_g)
-
 
 # Reorder the continents based on life expectancy according to the cross-country 
 # difference of lifeExp in each continent 2007. 

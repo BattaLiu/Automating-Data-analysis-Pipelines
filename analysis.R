@@ -4,6 +4,8 @@ rm(list=ls())
 
 # import the data from download.R
 library(readr)
+library(plyr)
+library(dplyr)
 gapminder <- read.delim("gap_sort.tsv") #I want continents treated as factors
 str(gapminder)
 #make sure new continent order is still in force
@@ -12,8 +14,7 @@ gapminder <- gapminder %>%
 levels(gapminder$continent)
 
 
-library(plyr)
-library(dplyr)
+
 # linear regression of life expectancy on year
 reg <- ddply(gapminder, ~ country + continent,fn <- function(dat, offset = 1952) {
 	the_fit <- lm(lifeExp ~ I(year - offset), dat)
